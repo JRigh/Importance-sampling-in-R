@@ -26,7 +26,7 @@ seq = 1:n
 plot(cumsum(h(xi))/seq, type="l", ylab="MC estimator",
      xlab = "n")
 # standard error theta_hat
-setheta_hat = sqrt(cumsum(h(x)^2)/seq - (cumsum(h(x))/seq)^2)
+setheta_hat = sqrt(cumsum(h(xi)^2)/seq - (cumsum(h(xi))/seq)^2)
 # lower bound of 95% confidence interval
 lines(cumsum(h(xi))/seq - qnorm(1-0.025) * setheta_hat / sqrt(seq), type="l",
       col="red",lty=2)
