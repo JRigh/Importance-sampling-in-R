@@ -37,21 +37,21 @@ lines(cumsum(h(xi))/seq + qnorm(1-0.025) * setheta_hat / sqrt(seq), type="l",
 # importance sampling example
 
 set.seed(1986)
-n <- 10000
+n = 10000
 theta.hat <- se <- numeric(2)
 h <- function(x) {exp(-x)/(1+x^2)}  # function to integrate
 # crude MC estimation
-u <- runif(n)
+u = runif(n)
 fg_1 <- h(u)
 
 theta.hat[1] <- mean(fg_1)  # the crude MC estimator
 se[1] <- sd(fg_1)/sqrt(n)  # its estimated standard error
 
-x <- tan(pi * u / 4)   # x's are transformation of u's via the choosen function
-fg_2 <- h(x) / (4 / ((1 + x^2) * pi))  # integration of f_tilde
+x = tan(pi * u / 4)   # x's are transformation of u's via the choosen function
+fg_2 = h(x) / (4 / ((1 + x^2) * pi))  # integration of f_tilde
 
-theta.hat[2] <- mean(fg_2)   # the importance sampling MC estimator
-se[2] <- sd(fg_2)/sqrt(n)  # its estimated standard error
+theta.hat[2] = mean(fg_2)   # the importance sampling MC estimator
+se[2] = sd(fg_2)/sqrt(n)  # its estimated standard error
 
 table=as.data.frame(rbind(theta.hat, se))
 names(table)=c("crude MC","IS MC")
@@ -63,9 +63,9 @@ table  # ISMC estimator has a smaller variance
 # plot convergence of MC estimators
 par(mfrow=c(1,1))
 seq = 1:(n/2)
-plot(cumsum(fg[1:(n/2)])/seq, type="l", ylab="MC estimators", col="firebrick3",
+plot(cumsum(fg_1[1:(n/2)])/seq, type="l", ylab="MC estimators", col="firebrick3",
      xlab = "n/2", main = "Convergence of the MC estimators", lwd = 2)
-lines(cumsum(fgx[1:(n/2)])/seq, type="l", col="black",lwd = 2)
+lines(cumsum(fg_2[1:(n/2)])/seq, type="l", col="black",lwd = 2)
 legend(3000, 0.6, legend=c("Crude MC estimator (black)", "IS MC estimator (red)"),
        col=c('black', 'firebrick3'), lty=1, cex=0.7)
 
@@ -73,3 +73,4 @@ legend(3000, 0.6, legend=c("Crude MC estimator (black)", "IS MC estimator (red)"
 #----
 # end
 #----
+
